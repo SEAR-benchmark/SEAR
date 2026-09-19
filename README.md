@@ -139,9 +139,10 @@ Do not report the evaluation-set EER operating point as a deployable threshold.
 
 ## Dataset
 
-The SEAR AQA annotations are released separately on Hugging Face. Its four configurations
-(`t1`, `t2`, `t3`, and `t4`) contain the complete annotations. Audio paths are identifiers
-aligned with locally obtained ASVspoof data; source audio is not redistributed here.
+The [SEAR dataset](https://huggingface.co/datasets/Rosa21/sear) is released on Hugging
+Face. Its four configurations (`t1`, `t2`, `t3`, and `t4`) contain the complete AQA
+annotations. Audio paths are identifiers aligned with locally obtained ASVspoof data;
+source audio is not redistributed here.
 
 ## Reproducibility
 
