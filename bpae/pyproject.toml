@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bpae"
+version = "0.1.0"
+description = "Bona-Fide-Prior Acoustic Evidence Agent for evidence-grounded audio deepfake detection"
+requires-python = ">=3.10"
+dependencies = ["librosa>=0.10", "numpy>=1.24", "soundfile>=0.12"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+qwen = ["torch>=2.1", "transformers>=4.52", "qwen-omni-utils"]
+
+[project.scripts]
+bpae = "bpae.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
