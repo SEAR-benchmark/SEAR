@@ -1,4 +1,4 @@
-"""Bona-Fide-Prior Acoustic Evidence Agent (BPAE)."""
+"""Bona-Fide-Based Acoustic Evidence Agent (BAEA)."""
 
 from .acoustic import FEATURE_GROUPS, FEATURE_NAMES, compute_acoustic_features
 from .agent import run_adaptive, run_fixed

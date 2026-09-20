@@ -1,4 +1,4 @@
-"""Leakage-safe Fixed and Adaptive BPAE orchestration."""
+"""Leakage-safe Fixed and Adaptive BAEA orchestration."""
 from __future__ import annotations
 
 import json

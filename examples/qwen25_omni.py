@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minimal Qwen2.5-Omni planner adapter for BPAE-Adaptive."""
+"""Minimal Qwen2.5-Omni planner adapter for BAEA-Adaptive."""
 from __future__ import annotations
 
 import argparse
@@ -11,7 +11,7 @@ import torch
 from qwen_omni_utils import process_mm_info
 from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
 
-from bpae import run_adaptive, run_fixed
+from baea import run_adaptive, run_fixed
 
 
 class Qwen25OmniPlanner:

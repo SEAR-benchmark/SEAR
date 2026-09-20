@@ -1,8 +1,8 @@
 import numpy as np
 
-from bpae.acoustic import FEATURE_NAMES
-from bpae.agent import FOLLOW_UP_PROMPT, _parse_plan
-from bpae.reference import build_reference_statistics, compare_with_reference, get_top_anomalies
+from baea.acoustic import FEATURE_NAMES
+from baea.agent import FOLLOW_UP_PROMPT, _parse_plan
+from baea.reference import build_reference_statistics, compare_with_reference, get_top_anomalies
 
 
 def test_feature_inventory_has_35_unique_names():

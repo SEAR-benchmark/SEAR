@@ -1,12 +1,12 @@
-# BPAE: Bona-Fide-Prior Acoustic Evidence Agent
+# BAEA: Bona-Fide-Based Acoustic Evidence Agent
 
-BPAE augments a frozen audio language model (ALM) with controlled, deterministic
+BAEA augments a frozen audio language model (ALM) with controlled, deterministic
 signal-analysis tools. The ALM may select tools and organize their outputs, but it cannot
 execute arbitrary Python, modify acoustic measurements, or access labels and attack types.
 
 ## Method
 
-For each recording, BPAE computes up to 35 utterance-level descriptors grouped as:
+For each recording, BAEA computes up to 35 utterance-level descriptors grouped as:
 
 - spectral: 8 features;
 - cepstral: 20 MFCC means;
@@ -23,7 +23,7 @@ z = (x - median) / (1.4826 * MAD + epsilon)
 The returned evidence retains the feature name, raw value, reference median and MAD,
 robust z-score, direction, and status.
 
-BPAE exposes two policies:
+BAEA exposes two policies:
 
 - **Fixed** measures all 35 features and applies a deterministic task-conditioned evidence
   budget (three cues for classification and five for rationale generation).
@@ -44,7 +44,7 @@ python -m pip install -e .
 
 ```python
 import json
-from bpae import run_fixed, run_adaptive
+from baea import run_fixed, run_adaptive
 
 reference = json.load(open("train_bonafide_reference.json"))
 
@@ -74,15 +74,15 @@ train_0001,/path/to/train_0001.flac
 train_0002,/path/to/train_0002.flac
 ```
 
-Then build the prior and run Fixed BPAE:
+Then build the prior and run Fixed BAEA:
 
 ```bash
-bpae build-reference \
+baea build-reference \
   --manifest bonafide_train.csv \
   --dataset ASVspoof2019_LA \
   --output train_bonafide_reference.json
 
-bpae fixed \
+baea fixed \
   --audio example.flac \
   --reference train_bonafide_reference.json \
   --objective classification \
@@ -115,7 +115,7 @@ never be used to build this artifact.
 - Evaluation labels, attack identities, and test statistics are unavailable to the agent.
 - Tool names and return fields are label-neutral.
 - The complete tool trace is retained for auditing.
-- Oracle benchmark evidence is not an input to BPAE and must be evaluated separately.
+- Oracle benchmark evidence is not an input to BAEA and must be evaluated separately.
 
 ## Repository scope
 

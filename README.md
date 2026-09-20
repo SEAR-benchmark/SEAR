@@ -5,7 +5,7 @@
 SEAR evaluates whether audio language models (ALMs) can identify and quantify
 signal-level acoustic anomalies and use them as evidence for audio deepfake detection and
 forensic rationale generation. This repository provides the implementation of the
-**Bona-Fide-Prior Acoustic Evidence Agent (BPAE)** and leakage-safe evaluation utilities.
+**Bona-Fide-Based Acoustic Evidence Agent (BAEA)** and leakage-safe evaluation utilities.
 
 > The SEAR AQA annotations are distributed separately through Hugging Face. ASVspoof audio
 > is not redistributed and must be obtained from its official source.
@@ -21,7 +21,7 @@ SEAR contains four tasks:
 | T3 | Acoustic-feature measurement |
 | T4 | Forensic-rationale generation |
 
-BPAE leaves the foundation ALM frozen. Deterministic tools compute 35 spectral,
+BAEA leaves the foundation ALM frozen. Deterministic tools compute 35 spectral,
 cepstral, prosodic, and energy features and compare them with median/MAD statistics
 estimated exclusively from bona-fide training speech. The resulting structured evidence
 is then supplied to the ALM for task-conditioned reasoning.
@@ -47,9 +47,9 @@ Frozen ALM response
 
 ## Policies
 
-- **BPAE-Fixed** computes all 35 features and deterministically selects the strongest
+- **BAEA-Fixed** computes all 35 features and deterministically selects the strongest
   task-conditioned deviations.
-- **BPAE-Adaptive** lets the frozen ALM choose among four whitelisted acoustic categories
+- **BAEA-Adaptive** lets the frozen ALM choose among four whitelisted acoustic categories
   and a bounded evidence budget. The controller validates every request and permits at
   most one follow-up tool-selection step.
 
@@ -59,8 +59,8 @@ Neither policy exposes evaluation labels, attack identities, or test-set statist
 
 ```text
 .
-├── bpae/                     # Installable method package
-│   ├── src/bpae/             # Features, prior, tools, policies, binding
+├── baea/                     # Installable method package
+│   ├── src/baea/             # Features, prior, tools, policies, binding
 │   └── tests/                # Core invariants and leakage checks
 ├── examples/
 │   └── qwen25_omni.py        # Frozen Qwen2.5-Omni planner adapter
@@ -73,13 +73,16 @@ Neither policy exposes evaluation labels, attack identities, or test-set statist
 Core tools:
 
 ```bash
-python -m pip install -e ./bpae
+python -m pip install -e ./baea
 ```
+
+The legacy `bpae` import and command remain available as compatibility aliases, but new
+code should use `baea`.
 
 Qwen2.5-Omni example:
 
 ```bash
-python -m pip install -e './bpae[qwen]'
+python -m pip install -e './baea[qwen]'
 ```
 
 ## Quick start
@@ -94,16 +97,16 @@ LA_T_000001,/path/to/LA_T_000001.flac
 Build the reference prior:
 
 ```bash
-bpae build-reference \
+baea build-reference \
   --manifest bonafide_train.csv \
   --dataset ASVspoof2019_LA \
   --output train_bonafide_reference.json
 ```
 
-Run BPAE-Fixed:
+Run BAEA-Fixed:
 
 ```bash
-bpae fixed \
+baea fixed \
   --audio example.flac \
   --reference train_bonafide_reference.json \
   --objective classification \

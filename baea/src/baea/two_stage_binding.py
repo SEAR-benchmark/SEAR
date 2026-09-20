@@ -1,4 +1,4 @@
-"""BPAE v4: training-global anomaly presence followed by deterministic binding.
+"""BAEA v4: training-global anomaly presence followed by deterministic binding.
 
 Old evidence_policy.select_verified_candidate is deliberately unchanged.
 This module accepts only question/options, measured values and frozen train rules.
@@ -49,6 +49,10 @@ def two_stage_binding(question,values,rules):
     # anomaly into a no-anomaly answer; abstain when no option can be verified.
     return dict(result,prediction=min(ranked)[-1] if ranked else None,reason='verified_feature_value_direction' if ranked else 'anomaly_present_but_no_candidate_verified')
 
-def bpae_t2_v4(question,values,rules):
-    """Public BPAE binding entry point: ALM cannot overwrite this decision."""
+def baea_t2_v4(question,values,rules):
+    """Public BAEA binding entry point: ALM cannot overwrite this decision."""
     return two_stage_binding(question,values,rules)
+
+
+# Backward compatibility for pre-release experiment scripts.
+bpae_t2_v4 = baea_t2_v4

@@ -1,4 +1,4 @@
-"""Dataset-neutral BPAE command-line interface."""
+"""Dataset-neutral BAEA command-line interface."""
 from __future__ import annotations
 
 import argparse
@@ -46,7 +46,7 @@ def build_reference(args: argparse.Namespace) -> None:
     if not rows:
         raise ValueError("Reference manifest is empty")
     payload = {
-        "schema_version": "bpae_reference_v1",
+        "schema_version": "baea_reference_v1",
         "reference_source": {
             "dataset": args.dataset, "split": "train", "label": "bonafide",
         },
@@ -66,7 +66,7 @@ def fixed(args: argparse.Namespace) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(prog="bpae")
+    parser = argparse.ArgumentParser(prog="baea")
     commands = parser.add_subparsers(dest="command", required=True)
     reference = commands.add_parser("build-reference")
     reference.add_argument("--manifest", type=Path, required=True)
